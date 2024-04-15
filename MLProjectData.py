@@ -8,6 +8,7 @@ games_prp.csv removes positive and negative in favor of positive review percenta
 games_prp_thresh.csv turns prp into binary 1 or 0, 1 if >= prp_threshold
 games_norm.csv 1) divides metacritic score by 100, resulting in 0 < x < 1
                2) normalizes the log of minutes played
+rand_games.csv randomized the order of the entries
 '''
 prp_threshold = 0.750
 
@@ -100,7 +101,7 @@ print(games)
 games.to_csv('games_prp_thresh.csv', index=False)
 '''
 
-
+'''
 games = pd.read_csv("games_prp_thresh.csv")
 print(games)
 print(games.describe())
@@ -129,8 +130,15 @@ print(games)
 print(games.describe())
 
 games.to_csv('games_norm.csv', index=False)
+'''
 
+games = pd.read_csv("games_norm.csv")
+print(games)
 
+games = games.sample(frac=1)
+print(games)
+
+games.to_csv('rand_games.csv', index=False)
 
 
 
