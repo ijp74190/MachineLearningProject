@@ -1,4 +1,4 @@
-#Implements ML algorithms for games data
+#Games data does not include free games
 
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -11,11 +11,10 @@ from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-import numpy as np
 
 #print(confusion_matrix(y_test, y_pred))
 
-games = pd.read_csv('rand_games.csv')
+games = pd.read_csv('rand_free_games.csv')
 X = games.iloc[:, :-1].values
 y = games.iloc[:, -1].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
@@ -65,7 +64,6 @@ y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
 print('accuracy is',accuracy_score(y_pred,y_test), "\n")
 
-
 # Linear Regression
 print("Linear Regression")
 classifier = LinearRegression()
@@ -77,7 +75,6 @@ for num in y_score:
     y_pred.append(0 if val < 0 else val)
 print(classification_report(y_test, y_pred, zero_division=0.0))
 print('accuracy is',accuracy_score(y_pred,y_test), "\n")
-
 
 # Logistic Regression
 print("Logistic Regression")
@@ -113,7 +110,7 @@ print(classification_report(y_test, y_pred, zero_division=0.0))
 print('accuracy is',accuracy_score(y_pred,y_test), "\n")
 
 # Decision Tree's
-games = pd.read_csv('games_tree.csv')
+games = pd.read_csv('games_free_tree.csv')
 X = games.iloc[:, :-1].values
 y = games.iloc[:, -1].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
@@ -126,8 +123,8 @@ y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
 print('accuracy is',accuracy_score(y_pred,y_test))
 
-#Post pruning: best alpha = 0.001545303351451345
-a = 0.001545303351451345
+#Post pruning: best alpha = 0.0007572725453453884
+a = 0.0007572725453453884
 print("Decision Tree Post Pruning")
 classifier = DecisionTreeClassifier(random_state=0, ccp_alpha=a)
 classifier.fit(X_train, y_train)
