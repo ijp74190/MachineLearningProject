@@ -29,7 +29,8 @@ y_pred = svc.predict(X_test)
 acc_svc = round(svc.score(X_train, y_train) * 100, 2)
 print("svm accuracy of training data=", acc_svc)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test),"\n")
+svm_acc = accuracy_score(y_pred,y_test)
+print('accuracy is',svm_acc,"\n")
 
 
 # Naive Bayes
@@ -39,7 +40,8 @@ classifier = ComplementNB()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test))
+cnb_acc =accuracy_score(y_pred,y_test)
+print('accuracy is', cnb_acc)
 
 # Gaussian Naive Bayes
 print("Gaussian Naive Bayes")
@@ -47,7 +49,8 @@ classifier = GaussianNB()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test))
+gnb_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', gnb_acc)
 
 # Multinomial Naive Bayes
 print("Multinomial Naive Bayes")
@@ -55,7 +58,8 @@ classifier = MultinomialNB()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test))
+mnb_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', mnb_acc)
 
 # Bernoulli Naive Bayes
 print("Bernoulli Naive Bayes")
@@ -63,7 +67,8 @@ classifier = BernoulliNB()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test), "\n")
+bnb_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', bnb_acc, "\n")
 
 
 # Linear Regression
@@ -76,7 +81,8 @@ for num in y_score:
     val = int(round(num,0))
     y_pred.append(0 if val < 0 else val)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test), "\n")
+linreg_acc = accuracy_score(y_pred,y_test)
+print('accuracy is',linreg_acc, "\n")
 
 
 # Logistic Regression
@@ -85,7 +91,8 @@ classifier = LogisticRegression()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test), "\n")
+logreg_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', logreg_acc, "\n")
 
 
 # KNN
@@ -94,7 +101,8 @@ classifier = KNeighborsClassifier(n_neighbors=5)
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test))
+k5_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', k5_acc)
 
 # KNN
 print("KNN, k=7")
@@ -102,7 +110,8 @@ classifier = KNeighborsClassifier(n_neighbors=7)
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test))
+k7_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', k7_acc)
 
 # KNN
 print("KNN, k=9")
@@ -110,7 +119,17 @@ classifier = KNeighborsClassifier(n_neighbors=9)
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test), "\n")
+k9_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', k9_acc, "\n")
+
+# KNN
+print("KNN, k=11")
+classifier = KNeighborsClassifier(n_neighbors=11)
+classifier.fit(X_train, y_train)
+y_pred = classifier.predict(X_test)
+print(classification_report(y_test, y_pred, zero_division=0.0))
+k11_acc = accuracy_score(y_pred,y_test)
+print('accuracy is', k11_acc, "\n")
 
 # Decision Tree's
 games = pd.read_csv('games_tree.csv')
@@ -124,7 +143,8 @@ classifier = DecisionTreeClassifier()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test))
+ptree_acc = accuracy_score(y_pred,y_test)
+print('accuracy is',)
 
 #Post pruning: best alpha = 0.001545303351451345
 a = 0.001545303351451345
@@ -133,7 +153,8 @@ classifier = DecisionTreeClassifier(random_state=0, ccp_alpha=a)
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
-print('accuracy is',accuracy_score(y_pred,y_test))
+tree_acc = knn_acc = accuracy_score(y_pred,y_test)
+print('accuracy is',tree_acc)
 '''
 path = classifier.cost_complexity_pruning_path(X, y)
 alphas, impurities = path.ccp_alphas, path.impurities
@@ -150,3 +171,57 @@ y_pred = clf.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
 print('accuracy is',accuracy_score(y_pred,y_test))
 '''
+#Algorithm comparison chart
+accuracies = [svm_acc, gnb_acc, linreg_acc, logreg_acc, knn_acc, tree_acc]
+algs = ['SVM', 'Naive Bayes', 'Linear Reg.', 'Logistic Reg.',
+        'KNN', 'Decision tree']
+fig = plt.figure()
+
+# creating the bar plot
+#plt.ylim(1,100)
+plt.bar(algs, accuracies, color='maroon',
+        width=0.4)
+
+plt.xlabel("Algorithms")
+plt.ylabel("Accuracy")
+plt.title("Games data accuracy")
+plt.ylim(.7, .72)
+plt.show()
+
+
+#KNN Comparison
+accuracies = [k5_acc, k7_acc, k9_acc, k11_acc]
+algs = ['k=5', 'k=7', 'k=9', 'k=11']
+fig = plt.figure()
+# creating the bar plot
+plt.bar(algs, accuracies, color='maroon', width=0.4)
+plt.xlabel("k")
+plt.ylabel("Accuracy")
+plt.title("KNN Comparisons")
+plt.ylim(.65, .72)
+plt.show()
+
+
+#Naive Bayes Comparison
+accuracies = [cnb_acc, gnb_acc, mnb_acc, bnb_acc]
+algs = ['Complement', 'Gaussian', 'Multinomial', 'Bernoulli']
+fig = plt.figure()
+# creating the bar plot
+plt.bar(algs, accuracies, color='maroon', width=0.4)
+plt.xlabel("Algorithm")
+plt.ylabel("Accuracy")
+plt.title("Naive Bayes Comparisons")
+plt.ylim(0, .72)
+plt.show()
+
+#Decision Tree Comparison
+accuracies = [ptree_acc, tree_acc]
+algs = ['No Pruning', 'Post Pruning']
+fig = plt.figure()
+# creating the bar plot
+plt.bar(algs, accuracies, color='maroon', width=0.4)
+plt.xlabel("Algorithm")
+plt.ylabel("Accuracy")
+plt.title("Naive Bayes Comparisons")
+plt.ylim(.65, .72)
+plt.show()
