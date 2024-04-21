@@ -1,4 +1,3 @@
 # MachineLearningProject
-Files with 'free' in the name are the files without the free games.
-Algorithms actually run better with the free games included than without.
-All algorithms working, still need visualizations.
+Completed by Ian Pope and August Cross.
+Uses different machine learning algorithms to evaluate their effectiveness in predicting the percentage of positve reviews of a steam game.
