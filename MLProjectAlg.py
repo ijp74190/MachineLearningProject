@@ -144,7 +144,7 @@ classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(classification_report(y_test, y_pred, zero_division=0.0))
 ptree_acc = accuracy_score(y_pred,y_test)
-print('accuracy is',)
+print('accuracy is', ptree_acc)
 
 #Post pruning: best alpha = 0.001545303351451345
 a = 0.001545303351451345
@@ -176,28 +176,35 @@ accuracies = [svm_acc, gnb_acc, linreg_acc, logreg_acc, knn_acc, tree_acc]
 algs = ['SVM', 'Naive Bayes', 'Linear Reg.', 'Logistic Reg.',
         'KNN', 'Decision tree']
 fig = plt.figure()
+plt.bar(algs, accuracies, color='maroon',
+        width=0.4)
 
-# creating the bar plot
-#plt.ylim(1,100)
+plt.xlabel("Algorithms")
+plt.ylabel("Accuracy")
+plt.title("Games data accuracy (adjusted y-axis)")
+plt.ylim(.7, .72)
+plt.show()
+
+#Algorithm Comparison Chart- no adjust
 plt.bar(algs, accuracies, color='maroon',
         width=0.4)
 
 plt.xlabel("Algorithms")
 plt.ylabel("Accuracy")
 plt.title("Games data accuracy")
-plt.ylim(.7, .72)
+plt.ylim(0, 1)
 plt.show()
+
 
 
 #KNN Comparison
 accuracies = [k5_acc, k7_acc, k9_acc, k11_acc]
 algs = ['k=5', 'k=7', 'k=9', 'k=11']
-fig = plt.figure()
 # creating the bar plot
 plt.bar(algs, accuracies, color='maroon', width=0.4)
 plt.xlabel("k")
 plt.ylabel("Accuracy")
-plt.title("KNN Comparisons")
+plt.title("KNN Comparisons (adjusted y-axis)")
 plt.ylim(.65, .72)
 plt.show()
 
@@ -205,8 +212,6 @@ plt.show()
 #Naive Bayes Comparison
 accuracies = [cnb_acc, gnb_acc, mnb_acc, bnb_acc]
 algs = ['Complement', 'Gaussian', 'Multinomial', 'Bernoulli']
-fig = plt.figure()
-# creating the bar plot
 plt.bar(algs, accuracies, color='maroon', width=0.4)
 plt.xlabel("Algorithm")
 plt.ylabel("Accuracy")
@@ -217,11 +222,15 @@ plt.show()
 #Decision Tree Comparison
 accuracies = [ptree_acc, tree_acc]
 algs = ['No Pruning', 'Post Pruning']
-fig = plt.figure()
-# creating the bar plot
 plt.bar(algs, accuracies, color='maroon', width=0.4)
 plt.xlabel("Algorithm")
 plt.ylabel("Accuracy")
-plt.title("Decision Tree Comparisons")
+plt.title("Decision Tree Comparisons (adjusted y-axis)")
 plt.ylim(.65, .72)
 plt.show()
+
+'''
+y_test = games["Positive_review_threshold"]
+print(y_test.value_counts())
+print(games.describe())
+'''
